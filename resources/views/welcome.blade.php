@@ -44,10 +44,8 @@
     <div class="container">
         <div class="row chat-row">
             <div class="chat-content">
-                <ul>
-                  <li>
-                      Chat App Socket.io
-                  </li>
+                <ul class="eeee">
+                  
                 </ul>
             </div>
         </div>
@@ -77,8 +75,13 @@
           let message = $(this).html();
           console.log(message);
           if (e.which === 13 && !e.shiftKey) {
-            alert(1);
+            socket.emit('sendChatToServer', message);
+            chatInput.html('');
+            return false;
           }
+          socket.on('sendChatToClient', (message) => {
+           $('.eeee').append(`<li>${message}</li>`);
+          });
         });
     });
 </script>
